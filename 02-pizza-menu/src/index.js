@@ -67,6 +67,8 @@ root.render(
 );
 
 function Pizza(props) {
+  if (props.pizzaObj.soldOut) return null;
+
   return (
     <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />{" "}
@@ -102,12 +104,14 @@ function Menu() {
     <main className="menu ">
       <h2>Our Menu</h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzas.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>we are working on making some pizzas, please come back later</p>
       )}
 
       {/* <Pizza
@@ -152,12 +156,22 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <div className="order">
+      {isOpen ? (
+        <Order closeHour={closeHour} />
+      ) : (
         <p>
-          {new Date().toLocaleTimeString()}.we are {isOpen ? "open" : "closed"}.
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00
         </p>
-        <button className="btn">Order Now!!</button>
-      </div>
+      )}
     </footer>
   );
+
+  function Order(props) {
+    return (
+      <div className="order">
+        <p>We're open until {props.closeHour}:00. Order Now !!</p>
+        <button className="btn">Order Now!!</button>
+      </div>
+    );
+  }
 }
