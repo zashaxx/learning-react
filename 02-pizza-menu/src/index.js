@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -65,57 +66,80 @@ root.render(
   </React.StrictMode>
 );
 
-function Pizza() {
+function Pizza(props) {
   return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />{" "}
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + 1}</span>
+      </div>
     </div>
   );
 }
 
 function Header() {
+  // const style = {
+  //   color: "red",
+  //   fontSize: "50px",
+  //   textAlign: "center",
+  //   FontFace: "poppins",
+  // };
   return (
     <header className="header">
-      <h1>Lazeez Pizza.</h1>
+      <h1>Lazeez Pizza</h1>
     </header>
   );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu ">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+      <Pizza
+        name="Pizza Spinachi"
+        ingredients="tomato, mozarella, & ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={11}
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="tomato, mozarella, mushrooms, & onion"
+        price={13}
+        photoName="pizzas/funghi.jpg"
+      />
+
+      <Pizza
+        name="Pizza Prosciutto"
+        ingredients="tomato, mozarella, ham, aragula, & burrata cheese"
+        price={15}
+        photoName="pizzas/prosciutto.jpg"
+      />
+    </main>
   );
 }
 
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
 
-    const hour = new Date().getHours();
-    const openHour = 12;
-    const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
-    const isOpen = hour >= openHour && hour <= closeHour;
-    console.log(isOpen);
+  //ternary operator
 
-    //ternary operator
+  // if (hour >= openHour && hour <= closeHour) {
+  //     alert("We are open!");
+  // }else {
+  //     alert("We are closed!");
+  // }
 
-    // if (hour >= openHour && hour <= closeHour) {
-    //     alert("We are open!");
-    // }else {
-    //     alert("We are closed!");
-    // }
-
-  return React.createElement(
-    "footer",
-    null,
-    "We are currently open! and we are delivering pizzas."
+  return (
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}.we are {isOpen ? "open" : "closed"}.
+    </footer>
   );
 }
- 
