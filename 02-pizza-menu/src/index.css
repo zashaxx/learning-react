@@ -104,11 +104,18 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 4.8rem;
 }
+.pizzas > h1{
+  font-size: 3.2rem;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+}
 
 .pizza {
   display: flex;
   gap: 3.2rem;
 }
+
+
 
 .pizza img {
   width: 12rem;
