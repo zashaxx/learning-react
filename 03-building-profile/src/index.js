@@ -2,6 +2,34 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+const skills = [
+  {
+    skill: "React",
+    level: "Intermediate",
+    color: "#61DBFB",
+  },
+  {
+    skill: "JavaScript",
+    level: "Advanced",
+    color: "#fff200ff",
+  },
+  {
+    skill: "HTML + CSS",
+    level: "Advanced",
+    color: "#E34C26",
+  },
+  {
+    skill: "Node JS",
+    level: "Beginner",
+    color: "#68A063",
+  },
+  {
+    skill: "MongoDB",
+    level: "Beginner",
+    color: "#4DB33D",
+  },
+];
+
 function App() {
   return (
     <div className="card">
@@ -9,20 +37,14 @@ function App() {
       <div className="data">
         <Name />
         <Intro />
-        <Skillset />
+        <SkillList />
       </div>
     </div>
   );
 }
 
 function Avatar() {
-  return (
-    <img
-      className="avatar"
-      src="/userimage.png"
-      alt="User Avatar"
-    />
-  );
+  return <img className="avatar" src="/userimage.png" alt="User Avatar" />;
 }
 
 function Name() {
@@ -30,41 +52,41 @@ function Name() {
 }
 
 function Intro() {
-  return (<div>
-    <p className="intro">
-      Hi! I'm Aayush, a passionate web developer with a knack for creating
-      dynamic and responsive web applications. I love exploring new technologies
-      and continuously improving my skills.
-    </p>
-    <h1 className="name">Skills</h1>
-  </div>
+  return (
+    <div>
+      <p className="intro">
+        Hi! I'm Aayush, a passionate web developer with a knack for creating
+        dynamic and responsive web applications. I love exploring new
+        technologies and continuously improving my skills.
+      </p>
+      <h1 className="name">Skills</h1>
+    </div>
   );
 }
 
-function Skillset() {
-return(
-<div className="skillset"> 
-<Skill skill ='react' emoji ='⚛️' color ='#0ea3d1ff' />
-<Skill skill ='javascript' emoji ='💪' color ='yellow' />
-<Skill skill ='HTML + CSS' emoji ='❤️' color ='#ff0000ff'/>
-<Skill skill ='Node JS' emoji ='🌳' color ='#27ff06fc' /> 
-<Skill skill ='MongoDB' emoji ='📀' color ='#adffdeff'/>
-</div>
-)
-
+function SkillList() {
+  return (
+    <div className="skillset">
+      {skills.map((skill) => (
+        <Skill skill={skill.skill} color={skill.color} level={skill.level} />
+      ))}
+    </div>
+  );
 }
 
-function Skill(props){
-  return(
-<div className="skill" style={{backgroundColor:props.color}} > 
-  <span> {props.skill} </span>
-  <span> {props.emoji} </span>
-
-</div>
-  )
-
+function Skill({ skill, color, level }) {
+  return (
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span> {skill} </span>
+      <span>
+        {" "}
+        {level === "Beginner" && "🐣"}
+        {level === "Intermediate" && "🐥"}
+        {level === "Advanced" && "🦅"}
+      </span>
+    </div>
+  );
 }
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
