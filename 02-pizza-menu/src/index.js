@@ -66,16 +66,16 @@ root.render(
   </React.StrictMode>
 );
 
-function Pizza(props) {
-  if (props.pizzaObj.soldOut) return null;
+function Pizza({ pizzaObj}) {
+  if (pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />{" "}
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />{" "}
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>price: ${props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>price: ${pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -104,12 +104,17 @@ function Menu() {
     <main className="menu ">
       <h2>Our Menu</h2>
 
+      
+
       {numPizzas > 0 ? (
+        <React.Fragment>
+        <p>Authentic Italian pizzas made with fresh ingredients</p>
         <ul className="pizzas">
           {pizzas.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+          </React.Fragment>
       ) : (
         <p>we are working on making some pizzas, please come back later</p>
       )}
@@ -166,10 +171,10 @@ function Footer() {
     </footer>
   );
 
-  function Order(props) {
+  function Order(closeHour) {
     return (
       <div className="order">
-        <p>We're open until {props.closeHour}:00. Order Now !!</p>
+        <p>We're open until {closeHour}:00. Order Now !!</p>
         <button className="btn">Order Now!!</button>
       </div>
     );
