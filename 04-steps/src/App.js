@@ -65,13 +65,11 @@ function DateCounter() {
 
   return (
     <div className="date-counter">
-
-    <div>
+      <div>
         <button onClick={() => setStep(step - 5)}>-5</button>
         <span> Step: {step}</span>
         <button onClick={() => setStep(step + 5)}>+5</button>
-    </div>
-
+      </div>
 
       <div>
         <button onClick={() => setCount(count - step)}>-{step}</button>
@@ -86,10 +84,7 @@ function DateCounter() {
             ? `${count} days from today is: `
             : `${Math.abs(count)} days from today was: `}
         </span>
-        <span>
-          {date.toDateString()}
-        </span>
-
+        <span>{date.toDateString()}</span>
       </p>
     </div>
   );
