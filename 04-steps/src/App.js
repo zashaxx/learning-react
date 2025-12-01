@@ -43,10 +43,15 @@ const questions = [
 ];
 export default function App() {
   return (
-    <div>
+    <div className="app-container">
       <Steps />
-      <DateCounter />
+      <div className="date-counter-wrapper">
+        <DateCounter />
+      </div>
       <Flashcards />
+      <div className="date-counter-wrapper">
+        <DateCounterV2 />
+      </div>
     </div>
   );
 }
@@ -101,6 +106,7 @@ function DateCounter() {
 
   return (
     <div className="date-counter">
+      <p>Date Counter</p>
       <div>
         <button onClick={() => setStep(step - 5)}>-5</button>
         <span> Step: {step}</span>
@@ -130,8 +136,7 @@ function Flashcards() {
   const [selectedId, setSelectedId] = useState(null);
 
   function handleClick(id) {
-
-    setSelectedId(id !== selectedId ?id : null)
+    setSelectedId(id !== selectedId ? id : null);
   }
 
   return (
@@ -149,9 +154,62 @@ function Flashcards() {
             </p>
           </div>
         ))}
-
       </div>
-      <p>This is a bottom text</p>
     </>
+  );
+}
+
+function DateCounterV2() {
+  const [step, setStep] = useState(1);
+  const [count, setCount] = useState(0);
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
+  function handleReset() {
+    setCount(0);
+    setStep(1);
+  }
+
+  return (
+    <div className="date-counter">
+      <p>Date Counter - V2</p>
+
+      <input
+        type="range"
+        min="1"
+        max="20"
+        value={step}
+        onChange={(e) => setStep(Number(e.target.value))}
+      />
+
+      <div>
+        <span> Step: {step}</span>
+      </div>
+
+      <div>
+        <button onClick={() => setCount((c) => c - step)}>-{step}</button>
+        <input
+          type="text"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
+        <button onClick={() => setCount((c) => c + step)}>+{step}</button>
+      </div>
+      <p>
+        <span>
+          {count === 0
+            ? "Today is "
+            : count > 0
+            ? `${count} days from today is: `
+            : `${Math.abs(count)} days from today was: `}
+        </span>
+        <span>{date.toDateString()}</span>
+      </p>
+      {count !== 0 || step !== 1 ? (
+        <div>
+          <button onClick={handleReset}>Reset</button>
+        </div>
+      ) : null}
+    </div>
   );
 }
