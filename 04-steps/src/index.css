@@ -109,5 +109,51 @@ h3 {
   margin-top: 50px;
   font-family: monospace;
   font-weight: bold;
+}
 
+.flashcards {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.flashcards div {
+  text-align: center;
+  width: 400px;
+  height: 250px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.flashcards-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-family: monospace;
+}
+
+.flashcard-selected {
+  background-color: #2f72c3 !important;
+  color: #fff !important;
+}
+
+.flashcards div:hover {
+  background-color: #d4d4d4;
+  color: #333;
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.flashcards div {
+  transition: all 0.2s ease-in-out;
 }

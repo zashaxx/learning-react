@@ -6,11 +6,47 @@ const messages = [
   "Invest your new income 💰💸",
 ];
 
+const questions = [
+  {
+    id: 1234,
+    question: "What is React?",
+    answer: "A front-end JavaScript library for building user interfaces",
+  },
+  {
+    id: 4567,
+    question: "What is a component?",
+    answer: "A reusable piece of code that represents part of a user interface",
+  },
+  {
+    id: 8910,
+    question: "What is JSX?",
+    answer:
+      "A syntax extension that looks similar to HTML and is used with React to describe UI structure",
+  },
+  {
+    id: 1112,
+    question: "What are props?",
+    answer:
+      "Short for properties, props are read-only components that must be kept pure",
+  },
+  {
+    id: 1314,
+    question: "What is state in React?",
+    answer: "An object that represents the parts of the app that can change",
+  },
+  {
+    id: 1516,
+    question: "What is the virtual DOM?",
+    answer:
+      "A lightweight copy of the actual DOM that React uses to optimize updates",
+  },
+];
 export default function App() {
   return (
     <div>
       <Steps />
       <DateCounter />
+      <Flashcards />
     </div>
   );
 }
@@ -87,5 +123,35 @@ function DateCounter() {
         <span>{date.toDateString()}</span>
       </p>
     </div>
+  );
+}
+
+function Flashcards() {
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleClick(id) {
+
+    setSelectedId(id !== selectedId ?id : null)
+  }
+
+  return (
+    <>
+      <h2 className="flashcards-title">React Flashcards</h2>
+      <div className="flashcards">
+        {questions.map((question) => (
+          <div
+            key={question.id}
+            onClick={() => handleClick(question.id)}
+            className={question.id === selectedId ? "flashcard-selected" : ""}
+          >
+            <p>
+              {question.id === selectedId ? question.answer : question.question}
+            </p>
+          </div>
+        ))}
+
+      </div>
+      <p>This is a bottom text</p>
+    </>
   );
 }
