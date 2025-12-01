@@ -202,7 +202,7 @@ function DateCounterV2() {
             : count > 0
             ? `${count} days from today is: `
             : `${Math.abs(count)} days from today was: `}
-        </span>
+        </span> 
         <span>{date.toDateString()}</span>
       </p>
       {count !== 0 || step !== 1 ? (

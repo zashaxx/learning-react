@@ -1,19 +1,33 @@
 import { useState } from "react";
 
-const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: false },
-  { id: 2, description: "Boarding Pass", quantity: 1, packed: false },
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "Shirts", quantity: 5, packed: false },
-  { id: 4, description: "Shoes", quantity: 2, packed: true },
-];
 function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItem(item) {
+    setItems((items) => [...items, item]);
+  }
+
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
   return (
     <div className="App">
       <Logo />
-      <Form />
-      <PackagingList />
-      <Stats />
+      <Form onAddItem={handleAddItem} />
+      <PackagingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+      />
+      <Stats items={items} />
     </div>
   );
 }
@@ -26,20 +40,24 @@ function Logo() {
   );
 }
 
-function Form() {
+function Form({ onAddItem }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const newItem = { description, quantity, packed: false,id: Date.now() };
-
   function handleSubmit(e) {
     e.preventDefault();
+    if (!description) return;
+    const newItem = { description, quantity, packed: false, id: Date.now() };
+    onAddItem(newItem);
   }
   return (
     <form className="add-form" onSubmit={(e) => handleSubmit(e)}>
       <h3>What do you need for the trip ? 🛄</h3>
 
-      <select value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option key={num} value={num}>
             {num}
@@ -47,40 +65,69 @@ function Form() {
         ))}
       </select>
 
-      <input type="text" placeholder="Item..." value={description} onChange={(e) => setDescription(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
       <button>Add</button>
     </form>
   );
 }
 
-function PackagingList() {
+function PackagingList({ items, onDeleteItem, onToggleItem }) {
   return (
     <div className="list">
       <ul>
-        Packaging Items
-        {initialItems.map((item) => (
-          <Item key={item.id} item={item} />
+        {items.map((item) => (
+          <Item
+            key={item.id}
+            item={item}
+            onDeleteItem={onDeleteItem}
+            onToggleItem={onToggleItem}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItem, onToggleItem }) {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={() => onToggleItem(item.id)}
+      />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+
+  if (items.length === 0) {
+    return(
+      <p className="stats">Start adding items and pack your bags! 🧳</p>
+    )
+  }
+
+  const numItems = items.length;
+  const numPacked = items.filter((items) => items.packed).length;
+  const percentage = Math.round((numPacked / numItems) * 100);
   return (
     <footer className="stats">
-      <h3>Packaging Stats</h3>
+      <em>
+        {percentage === 100
+          ? "You are ready to go! 🛫"
+          :`
+      you have packed ${numItems} items on your list and you are packed ${percentage}%`}
+      </em> 
     </footer>
   );
 }
