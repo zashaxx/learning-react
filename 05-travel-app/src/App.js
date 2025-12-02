@@ -18,6 +18,9 @@ function App() {
       )
     );
   }
+
+  // function
+
   return (
     <div className="App">
       <Logo />
@@ -77,10 +80,30 @@ function Form({ onAddItem }) {
 }
 
 function PackagingList({ items, onDeleteItem, onToggleItem }) {
+  const [sortBy, setSortBy] = useState("input");
+
+  let sortedItems;
+  if (sortBy === "packed") {
+    sortedItems = items
+      .slice()
+      .sort()
+      .filter((item) => item.packed);
+  } else if (sortBy === "input") {
+    sortedItems = items;
+  } else if (sortBy === "unpacked") {
+    sortedItems = items
+      .slice()
+      .sort()
+      .filter((item) => !item.packed);
+  } else if (sortBy === "description") {
+    sortedItems = items
+      .slice()
+      .sort((a, b) => a.description.localeCompare(b.description));
+  }
   return (
     <div className="list">
       <ul>
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <Item
             key={item.id}
             item={item}
@@ -89,6 +112,15 @@ function PackagingList({ items, onDeleteItem, onToggleItem }) {
           />
         ))}
       </ul>
+
+      <div className="actions">
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="description">By Description</option>
+          <option value="packed">By Packed</option>
+          <option value="unpacked">By Unpacked</option>
+          <option value="input">By Input Order</option>
+        </select>
+      </div>
     </div>
   );
 }
@@ -110,11 +142,8 @@ function Item({ item, onDeleteItem, onToggleItem }) {
 }
 
 function Stats({ items }) {
-
   if (items.length === 0) {
-    return(
-      <p className="stats">Start adding items and pack your bags! 🧳</p>
-    )
+    return <p className="stats">Start adding items and pack your bags! 🧳</p>;
   }
 
   const numItems = items.length;
@@ -125,9 +154,9 @@ function Stats({ items }) {
       <em>
         {percentage === 100
           ? "You are ready to go! 🛫"
-          :`
+          : `
       you have packed ${numItems} items on your list and you are packed ${percentage}%`}
-      </em> 
+      </em>
     </footer>
   );
 }
