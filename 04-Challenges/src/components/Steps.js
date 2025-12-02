@@ -13,6 +13,15 @@ export function Steps() {
 
   const [isOpen, setIsOpen] = useState(true);
 
+  function Button({ className, onClick, text ,emoji }) {
+    return (
+      <button className={className} onClick={onClick}>
+        <span>{emoji}</span> 
+        {text}
+         
+      </button>
+    );
+  }
   return (
     <>
       <button className="close" onClick={() => setIsOpen((is) => !isOpen)}>
@@ -30,12 +39,8 @@ export function Steps() {
             Step {step}: {messages[step - 1]}{" "}
           </p>
           <div className="buttons">
-            <button className="prev" onClick={handlePrevious}>
-              Previous
-            </button>
-            <button className="next" onClick={handleNext}>
-              Next
-            </button>
+            <Button className="prev" onClick={handlePrevious} text="Previous" emoji={"👈"} />
+            <Button className="next" onClick={handleNext} text="Next" emoji={"👉"} />
           </div>
         </div>
       )}
