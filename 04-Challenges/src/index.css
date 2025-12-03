@@ -97,15 +97,28 @@ h3 {
   color: inherit;
 }
 
+.tip-calculator {
+  font-family: monospace;
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #1a5478;
+  border-radius: 10px;
+}
+
 .close:hover {
   color: #7950f2;
 }
 
-.prev{
+.prev {
   background-color: #e7e7e7;
   color: #333;
 }
-.next{
+.next {
   background-color: #7950f2;
   color: #fff;
 }
@@ -213,7 +226,6 @@ h3 {
   padding: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
 }
 
 .acc-header-title {
@@ -286,4 +298,56 @@ h3 {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.tip-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tip-select label {
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.tip-select select{
+  margin-top: 5px;
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #6a6969;
+  border-radius: 5px;
+}
+.bill-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.bill-input label {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.bill-input input {
+  margin-top: 5px;
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #8a8a8a;
+  border-radius: 5px;
+}
+
+.reset-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
