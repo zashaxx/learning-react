@@ -30,6 +30,9 @@ export const faqs = [
 ];
 
 export default function Accordion({ data }) {
+
+    const [openIndex, setOpenIndex] = useState(null);
+
   return (
     <>
       <div className="acc-head-box">
@@ -39,6 +42,8 @@ export default function Accordion({ data }) {
       <div className="accordion">
         {data.map((el, i) => (
           <AccordionItem
+            openIndex={openIndex}
+            setOpenIndex={setOpenIndex}
             key={el.title}
             title={el.title}
             text={el.text}
@@ -50,13 +55,13 @@ export default function Accordion({ data }) {
   );
 }
 
-function AccordionItem({ num, title, text }) {
-  const [isOpen, setIsOpen] = useState(false);
+function AccordionItem({ num, title, text , openIndex, setOpenIndex }) {
+    const isOpen = num === openIndex;
 
   return (
     <>
       <div className={`acc-item ${isOpen ? "open" : ""}`}>
-        <div className="acc-header" onClick={() => setIsOpen(!isOpen)}>
+        <div className="acc-header" onClick={() => setOpenIndex(isOpen ? null : num)}>
           <p className="acc-number">{num}</p>
           <h3 className="acc-title">{title}</h3>
           <p className="acc-toggle">
