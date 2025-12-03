@@ -4,7 +4,7 @@ import { Flashcards } from "./Flashcards";
 import { DateCounterV2 } from "./DateCounterV2";
 import Accordion from "./Accordion.js";
 import { faqs } from "./Accordion.js";
-
+import TipCalculator from "./TipCalculator.js";
 
 export const messages = [
   "Learn React ⚛️",
@@ -56,9 +56,9 @@ export default function App() {
       <Flashcards />
       <div className="date-counter-wrapper">
         <DateCounterV2 />
-
       </div>
       <Accordion data={faqs} />
+      <TipCalculator />
     </div>
   );
 }
