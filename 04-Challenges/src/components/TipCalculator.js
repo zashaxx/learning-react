@@ -75,8 +75,12 @@ export default function TipCalculator() {
         {" "}
         How did your partner feel about the service?{" "}
       </TipInput>
-      <OutputTotals />
-      <button className="reset-button" onClick={(e) => resetInputs()}>Reset</button>
+    {billAmount > 0 &&(
+        <>
+          <OutputTotals />
+          <button className="reset-button" onClick={(e) => resetInputs()}>Reset</button>
+        </>
+    )}
     </div>
   );
 }
