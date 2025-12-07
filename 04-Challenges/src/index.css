@@ -97,6 +97,16 @@ h3 {
   color: inherit;
 }
 
+
+
+.te-box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background-color: #f7f7f7;
+}
+
+
 .tip-calculator {
   font-family: monospace;
   font-size: large;

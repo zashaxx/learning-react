@@ -5,6 +5,7 @@ import { DateCounterV2 } from "./DateCounterV2";
 import Accordion from "./Accordion.js";
 import { faqs } from "./Accordion.js";
 import TipCalculator from "./TipCalculator.js";
+import TextExpand from "./TextExpand.js";
 
 export const messages = [
   "Learn React ⚛️",
@@ -59,6 +60,7 @@ export default function App() {
       </div>
       <Accordion data={faqs} />
       <TipCalculator />
+      <TextExpand />
     </div>
   );
 }

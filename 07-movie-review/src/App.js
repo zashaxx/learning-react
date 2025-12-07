@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 const tempMovieData = [
   {
     imdbID: "tt1375666",
@@ -97,28 +98,28 @@ function Main({ children }) {
   );
 }
 
-function WatchedBox() {
-  const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
+// function WatchedBox() {
+//   const [watched, setWatched] = useState(tempWatchedData);
+//   const [isOpen2, setIsOpen2] = useState(true);
 
-  return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "–" : "+"}
-      </button>
-      {isOpen2 && (
-        <>
-          <WatchedSummary watched={watched} />
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen2((open) => !open)}
+//       >
+//         {isOpen2 ? "–" : "+"}
+//       </button>
+//       {isOpen2 && (
+//         <>
+//           <WatchedSummary watched={watched} />
 
-          <WatchedMovieList watched={watched} />
-        </>
-      )}
-    </div>
-  );
-}
+//           <WatchedMovieList watched={watched} />
+//         </>
+//       )}
+//     </div>
+//   );
+// }
 
 function WatchedMovieList({ watched }) {
   return (
@@ -183,17 +184,17 @@ function WatchedSummary({ watched }) {
   );
 }
 
-function ListBox({ children }) {
-  const [isOpen1, setIsOpen1] = useState(true);
+function Box({ element }) {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="box">
       <button
         className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
+        onClick={() => setIsOpen((open) => !open)}
       >
-        {isOpen1 ? "–" : "+"}
+        {isOpen ? "–" : "+"}
       </button>
-      {isOpen1 &&  children }
+      {isOpen && element}
     </div>
   );
 }
@@ -223,6 +224,7 @@ function Movie({ movie }) {
   );
 }
 export default function App() {
+  const [watched, setWatched] = useState(tempWatchedData);
   const [movies, setMovies] = useState(tempMovieData);
   return (
     <>
@@ -231,11 +233,12 @@ export default function App() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <ListBox movies={movies}>
-          <MovieList movies={movies} />
-        </ListBox>
-        <WatchedBox movies={movies} />
-      </Main>
+      <Box element={<MovieList movies={movies} />} />
+      <Box element ={<>
+        <WatchedSummary watched={watched} />
+        <WatchedMovieList watched={watched} />
+      </>} />
+</Main>
     </>
   );
 }
