@@ -1,8 +1,7 @@
-
 export default function TextExpand() {
   return (
     <div>
-      <TextExpander>
+      <TextExpander btnClassName="te-btn">
         Space travel is the ultimate adventure! Imagine soaring past the stars
         and exploring new worlds. It's the stuff of dreams and science fiction,
         but believe it or not, space travel is a real thing. Humans and robots
@@ -15,6 +14,7 @@ export default function TextExpand() {
         expandButtonText="Show text"
         collapseButtonText="Collapse text"
         buttonColor="#ff6622"
+        // btnClassName="te-btn"
       >
         Space travel requires some seriously amazing technology and
         collaboration between countries, private companies, and international
@@ -23,7 +23,7 @@ export default function TextExpand() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander expanded={true} className="te-box">
+      <TextExpander expanded={true} className="te-box" btnClassName="te-btn">
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
@@ -33,6 +33,20 @@ export default function TextExpand() {
   );
 }
 
-function TextExpander() {
-  return <div>TODO</div>;
+function TextExpander({
+  btnClassName,
+  collapsedNumWords,
+  expandButtonText = "show more",
+  collapseButtonText,
+  buttonColor,
+  expanded,
+  className,
+  children,
+}) {
+  return (
+    <div className={className}>
+      <span>{children}</span>
+      <button className={btnClassName}>{expandButtonText}</button>
+    </div>
+  );
 }
