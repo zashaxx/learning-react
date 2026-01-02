@@ -97,6 +97,23 @@ h3 {
   color: inherit;
 }
 
+.te-btn{
+  background-color: #ffb004;
+border: 2px solid #000000;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.te-box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background-color: #f7f7f7;
+}
+
+
 .tip-calculator {
   font-family: monospace;
   font-size: large;
